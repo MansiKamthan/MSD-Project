@@ -11,8 +11,8 @@
         <div class="container">
                     <div class="row">
                         <div class="col-5 col-xl-5">
-                             <div class="hometext">
-                                <div class="homeh1" >
+                             <div>
+                                <div>
                                     <h1>Find your Dream Home !!</h1>
                                 </div>
                                  <div class="col-9" style="padding-bottom: 5%;">
@@ -36,13 +36,13 @@
                 <div class="section-2">
                                 {% for property in properties %}
                                     <div>
-                                            <u><h1>
+                                            <u><h2>
                                                 <span style="background-color: #cc9900; padding-right: 15px;color: black">Featured Property
                                                 </span>
-                                            </h1></u>
+                                            </h2></u>
                                     </div>
                                     <img class="homeimage" src="{{ property.image_url }}" alt="{{ property.name }}">
-                                    <h2>{{ property.name }}</h2>
+                                    <h2><b>{{ property.name }}</b></h2>
                                     <div>
                                         <p>Price: ${{ property.price }}</p>
                                     </div>
