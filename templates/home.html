@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+        <html>
+
+        <body>
+        <div><br/></div>
+        <div class="container">
+                    <div class="row">
+                        <div class="col-5 col-xl-5">
+                             <div class="hometext">
+                                <div class="homeh1" >
+                                    <h1>Find your Dream Home !!</h1>
+                                </div>
+                                 <div class="col-9" style="padding-bottom: 5%;">
+                                    <p style="font-weight: bold;font-size: 18px">CK Real Estate is a real estate company that specializes in selling and leasing residential and
+                                        commercial
+                                        properties. The company is based in the United States and has a team of expirienced real estate
+                                        professionals who are dedicated to providing excellent service to their client.</p>
+                                 </div>
+                                 <div class="col-9">
+                                    <P style="font-weight: bold; font-size: 18px">CK Real Estate is committed to providing personalized service to each of its clients. The company takes
+                                        the
+                                        time to understand the unique needs and goals of each client and works to develop a customized stratergy
+                                        to
+                                        help them achieve their real estate objectives. With a focus on building long-term relationships with
+                                        its
+                                        client, CK Real Estate is dedicated to providing exceptional service that exceeds expectations</p>
+                                 </div>
+                            </div>
+                        </div>
+            <div class="col-7" >
+                <div class="section-2">
+                                {% for property in properties %}
+                                    <div>
+                                            <u><h1>
+                                                <span style="background-color: #cc9900; padding-right: 15px;color: black">Featured Property
+                                                </span>
+                                            </h1></u>
+                                    </div>
+                                    <img class="homeimage" src="{{ property.image_url }}" alt="{{ property.name }}">
+                                    <h2>{{ property.name }}</h2>
+                                    <div>
+                                        <p>Price: ${{ property.price }}</p>
+                                    </div>
+                                    <div>
+                                        <p>Bedrooms: {{ property.bedrooms }}</p>
+                                        <p>Bathrooms: {{ property.bathrooms }}</p></div>
+                                    <div>
+                                        <p>Square Feet: {{ property.square_feet }}</p>
+                                        <p>Location : {{ property.address }}</p>
+                                        <hr>
+                                    </div>
+                                {% endfor %}
+                        <button class="btn btn-lg btn-viewDetails" ><b>View Details</b> </button>
+                    </div>
+            </div>
+        </div>
+       </div>
+
+{#        <div class="hometext">#}
+{#            <div class="homeh1">#}
+{#                <h1>Find your Dream Home !!</h1>#}
+{#            </div>#}
+{#            <p>CK Real Estate is a real estate company that specializes in selling and leasing residential and#}
+{#                commercial#}
+{#                properties. The company is based in the United States and has a team of expirienced real estate#}
+{#                professionals who are dedicated to providing excellent service to their client.</p>#}
+{#            <P>CK Real Estate is committed to providing personalized service to each of its clients. The company takes#}
+{#                the#}
+{#                time to understand the unique needs and goals of each client and works to develop a customized stratergy#}
+{#                to#}
+{#                help them achieve their real estate objectives. With a focus on building long-term relationships with#}
+{#                its#}
+{#                client, CK Real Estate is dedicated to providing exceptional service that exceeds expectations</p>#}
+{#        </div>#}
+
+
+{#    <div>#}
+{#        {% for property in properties %}#}
+{#            <div class=text-box">#}
+{#                <u><h1 class="homefeatured">Featured Property</h1></u>#}
+{#            </div>#}
+{#            <img class="homeimage" src="{{ property.image_url }}" alt="{{ property.name }}">#}
+{#            <h2 class="propertytext">{{ property.name }}</h2>#}
+{#            <div class="propertydetail">#}
+{#                <p>{{ property.description }}</p>#}
+{#                <p>Price: ${{ property.price }}</p>#}
+{#            </div>#}
+{#            <div class="propertytext1">#}
+{#                <p>Bedrooms: {{ property.bedrooms }}</p>#}
+{#                <p>Bathrooms: {{ property.bathrooms }}</p></div>#}
+{#            <div class="propertytext2">#}
+{#                <p>Square Feet: {{ property.square_feet }}</p>#}
+{#                <hr>#}
+{#            </div>#}
+{#        {% endfor %}#}
+{#    <button>View Details</button>#}
+{##}
+{#    </div>#}
+    </body>
+
+    </html>
+    </div>
+
+{% endblock %}
+
