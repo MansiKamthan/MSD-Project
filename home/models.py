@@ -1,15 +1,54 @@
 from django.db import models
+from django.utils import timezone
 
-class Property(models.Model):
+class PropertyType(models.Model) :
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=255)
+    property_type_name = models.CharField(max_length=255)
+
+class PropertyNeighborhood(models.Model) :
+    id = models.AutoField(primary_key=True)
+    property_neighborhood_name = models.CharField(max_length=255)
+
+class PropertyPricerange(models.Model) :
+    id = models.AutoField(primary_key=True)
+    property_price_range_name = models.CharField(max_length=255)
+class Property(models.Model) :
+
+    STATUS_CHOICES =(
+        ('available', 'AVAILABLE'),
+        ('pending', 'PENDING'),
+        ('sold', 'SOLD'),
+    )
+
+    PROPERTY_CHOICES = (
+        (True, 'Yes'),
+        (False, 'No')
+    )
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='none')
+    description = models.CharField(max_length=255)
     address = models.CharField(max_length=255)
-    city = models.CharField(max_length=100)
-    state = models.CharField(max_length=100)
-    zip_code = models.CharField(max_length=10)
     bedrooms = models.IntegerField()
     bathrooms = models.DecimalField(max_digits=3, decimal_places=1)
     square_feet = models.IntegerField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    description = models.TextField()
-    image_url = models.CharField(max_length=255,default="https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80")
+    featured_property = models.BooleanField(choices=PROPERTY_CHOICES,default='False')
+    property_type = models.ForeignKey(PropertyType, on_delete=models.SET_NULL, null=True)
+    property_neighborhood = models.ForeignKey(PropertyNeighborhood, on_delete=models.SET_NULL, null=True)
+    property_type_price_range = models.ForeignKey(PropertyPricerange, on_delete=models.SET_NULL,null=True)
+
+class PropertyImage(models.Model) :
+    id = models.AutoField(primary_key=True)
+    property_listing_image_main = models.ImageField(upload_to='media/property_images/%Y/%m/%d/', blank=True)
+    property_listing_image_all = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
+    property_id = models.ForeignKey(Property, on_delete=models.SET_NULL, null=True)
+
+
+
+class Search(models.Model) :
+    id = models.AutoField(primary_key=True)
+    date = models.DateTimeField(default=timezone.now)
+    property_type = models.ForeignKey(PropertyType, on_delete=models.SET_NULL, null=True)
+    property_neighborhood = models.ForeignKey(PropertyNeighborhood, on_delete=models.SET_NULL, null=True)
+    property_type_price_range = models.ForeignKey(PropertyPricerange, on_delete=models.SET_NULL, null=True)
