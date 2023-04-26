@@ -11,9 +11,9 @@
         <div class="container">
                     <div class="row">
                         <div class="col-5 col-xl-5">
-                             <div class="hometext">
-                                <div class="homeh1" >
-                                    <h1>Find your Dream Home !!</h1>
+                             <div>
+                                <div>
+                                    <h1> Find your Dream Home !!</h1>
                                 </div>
                                  <div class="col-9" style="padding-bottom: 5%;">
                                     <p style="font-weight: bold;font-size: 18px">CK Real Estate is a real estate company that specializes in selling and leasing residential and
@@ -34,27 +34,31 @@
                         </div>
             <div class="col-7" >
                 <div class="section-2">
-                                {% for property in properties %}
+{#                                     {% for property in properties %}#}
                                     <div>
-                                            <u><h1>
+                                            <u><h2>
                                                 <span style="background-color: #cc9900; padding-right: 15px;color: black">Featured Property
                                                 </span>
-                                            </h1></u>
+                                            </h2></u>
                                     </div>
-                                    <img class="homeimage" src="{{ property.image_url }}" alt="{{ property.name }}">
-                                    <h2>{{ property.name }}</h2>
+                                        <img class="homeimage" src="{% if properties.property_image_main %}{{ properties.property_image_main.url }}
+                                                  {% else %}
+                                                    {% static "img/no_image.png" %}
+                                                  {% endif %}">
+{#                                    <img class="homeimage" src="{{ properties.property_image_main }}" alt="{{ property.name }}">#}
+                                    <p> <b>{{ properties.name }}</b></p>
                                     <div>
-                                        <p>Price: ${{ property.price }}</p>
+                                        <p>Price: ${{ properties.price }}</p>
                                     </div>
                                     <div>
-                                        <p>Bedrooms: {{ property.bedrooms }}</p>
-                                        <p>Bathrooms: {{ property.bathrooms }}</p></div>
+                                        <p>Bedrooms: {{ properties.bedrooms }}</p>
+                                        <p>Bathrooms: {{ properties.bathrooms }}</p></div>
                                     <div>
-                                        <p>Square Feet: {{ property.square_feet }}</p>
-                                        <p>Location : {{ property.address }}</p>
+                                        <p>Square Feet: {{ properties.square_feet }}</p>
+                                        <p>Location : {{ properties.address }}</p>
                                         <hr>
                                     </div>
-                                {% endfor %}
+{#                                {% endfor %}#}
                         <button class="btn btn-lg btn-viewDetails" ><b>View Details</b> </button>
                     </div>
             </div>
