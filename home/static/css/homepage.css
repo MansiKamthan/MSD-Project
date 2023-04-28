@@ -25,7 +25,18 @@ body,html{
 h1 {
     color: chocolate;
     margin-top: 10px;
+<<<<<<< HEAD
     }
+=======
+
+}
+
+/*.homeh1 {*/
+/*    text-align: left;*/
+/*    font-size: larger;*/
+/*    margin-left:10px;*/
+/*}*/
+>>>>>>> f3aea7e6e7731bb68a497bae523f02f7fdb47e55
 
 .section-2{
     padding-left: 10%;

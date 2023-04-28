@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+
 class PropertyType(models.Model) :
     id = models.AutoField(primary_key=True)
     property_type_name = models.CharField(max_length=255)
@@ -13,7 +14,9 @@ class PropertyPricerange(models.Model) :
     property_price_range_name = models.CharField(max_length=255)
 class Property(models.Model) :
 
-    STATUS_CHOICES = (
+
+
+    STATUS_CHOICES =(
         ('available', 'AVAILABLE'),
         ('pending', 'PENDING'),
         ('sold', 'SOLD'),
@@ -48,7 +51,6 @@ class Property(models.Model) :
 class PropertyImage(models.Model):
 
     id = models.AutoField(primary_key=True)
-    #slug = models.SlugField(max_length=200, db_index=True)
     property_listing_image_main = models.ImageField(upload_to='media/property_images/%Y/%m/%d/', blank=True)
     property_listing_image_All = models.ImageField(upload_to='media/property_images/%Y/%m/%d/', blank=True)
     property_id = models.ForeignKey(Property, on_delete=models.SET_NULL, null=True)
@@ -59,9 +61,7 @@ class PropertyImage(models.Model):
     class Meta:
         ordering = ('property_id',)
 
-
-
-class Search(models.Model):
+class Search(models.Model) :
     id = models.AutoField(primary_key=True)
     date = models.DateTimeField(default=timezone.now)
     property_type = models.ForeignKey(PropertyType, on_delete=models.SET_NULL, null=True)
