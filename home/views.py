@@ -55,3 +55,7 @@ def home_view(request):
 
 def event_view(request):
     return render(request, 'event.html')
+
+
+def profile_view(request):
+    return render(request, 'profile.html')
