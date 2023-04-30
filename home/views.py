@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .forms import RegistrationForm
-from django.contrib.auth.decorators import login_required
 from .models import Property
 import os
 
@@ -36,12 +36,12 @@ def register_view(request):
         form = RegistrationForm()
     return render(request, 'registration/registration.html', {'form': form})
 
+
 def home_view(request):
     # if not request.user.is_authenticated:
     #     return redirect('login')
 
     properties = Property.objects.all()
-
 
     context = {
         'properties': properties,
@@ -50,3 +50,7 @@ def home_view(request):
     print(context)
 
     return render(request, 'home.html', context)
+
+
+def event_view(request):
+    return render(request, 'event.html')
