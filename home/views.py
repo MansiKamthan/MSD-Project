@@ -59,3 +59,9 @@ def event_view(request):
 
 def profile_view(request):
     return render(request, 'profile.html')
+
+
+def listing_view(request):
+    listings = Property.objects.all()
+    context = {'listings': listings}
+    return render(request, 'listings.html', context)
