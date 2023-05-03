@@ -25,6 +25,8 @@
 			text-align: left;
 			outline: none;
 			font-size: 15px;
+            margin-top: 20px;
+            font-weight: bold;
 		}
 
 		.active, .collapsible:hover {
@@ -52,8 +54,29 @@
 			overflow: auto;
 			transition: max-height 0.2s ease-out;
 			background-color: #f1f1f1;
-
 		}
+
+		.content figure {
+			display: flex;
+			align-items: center;
+			margin-bottom: 20px;
+		}
+
+		.content figure img {
+			flex: 0 0 auto;
+			width: 200px;
+			height: auto;
+			margin-right: 20px;
+		}
+
+		.content figure figcaption {
+			flex: 1 1 auto;
+		}
+
+        .places-to-eat {
+            font-weight: bold;
+            color: black;
+        }
 	</style>
 </head>
 <body>
@@ -96,7 +119,7 @@ Time:7:00 AM to 1:00 PM</figcaption>
       <img src="{% static 'img/old.jpeg' %}" alt="Image 1">
       <figcaption>The Old Market is known for its unique blend of old and new, with many of the historic buildings having been converted into trendy restaurants, bars, and boutiques. It is also home to several art galleries and theaters, as well as the popular Omaha Farmers Market</figcaption>
     </figure>
-               <figure>
+        <figure>
       <img src="{% static 'img/oppd.jpeg' %}" alt="Image 2">
       <figcaption>The OPPD Arboretum is a public park and arboretum located in Omaha.The OPPD Arboretum features a variety of trees, shrubs, and other plant species that are native to the region, as well as several walking paths and nature trails. The park is open to the public and offers a peaceful retreat from the city's urban environment.</figcaption>
     </figure>
