@@ -30,7 +30,7 @@
                     <a class="nav-link" href="{% url 'home:listings' %}">Listings</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Search</a>
+                    <a class="nav-link" href="{% url 'home:property_search' %}">Search</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'home:profile' %}">Profile</a>
@@ -39,10 +39,17 @@
                     <a class="nav-link" href="{% url 'home:event' %}">Events</a>
                 </li>
                 {% if user.is_authenticated %}
-                <li><a class="nav-link" href="#">Reports</a>
+                <li><a class="nav-link" href="{% url 'home:generate_report' %}">Reports</a>
                 </li>
                 {% endif %}
+
+                {% if user.is_authenticated %}
+                    <li><a class="nav-link" href="{% url 'home:add_property' %}">Add Property</a>
+                     </li>
+                {% endif %}
             </ul>
+
+
             <ul class="navbar-nav">
                 {% if user.is_authenticated %}
                 <li><a class="nav-link" href="{% url 'logout' %}">Logout</a>

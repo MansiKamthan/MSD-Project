@@ -6,17 +6,22 @@ class PropertyType(models.Model):
     id = models.AutoField(primary_key=True)
     property_type_name = models.CharField(max_length=255)
 
+    def __str__(self):
+        return str(self.property_type_name)
 
 class PropertyNeighborhood(models.Model):
     id = models.AutoField(primary_key=True)
     property_neighborhood_name = models.CharField(max_length=255)
 
+    def __str__(self):
+        return str(self.property_neighborhood_name)
 
 class PropertyPricerange(models.Model):
     id = models.AutoField(primary_key=True)
     property_price_range_name = models.CharField(max_length=255)
 
-
+    def __str__(self):
+        return str(self.property_price_range_name)
 
 class Property(models.Model):
 
@@ -40,6 +45,7 @@ class Property(models.Model):
     square_feet = models.IntegerField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     featured_property = models.BooleanField(choices=PROPERTY_CHOICES, default='False')
+    flag = models.BooleanField(default=True)
     property_image_main = models.ImageField(upload_to='media/property_images/%Y/%m/%d/', blank=True)
     property_image_1 = models.ImageField(upload_to='media/property_images/%Y/%m/%d/', blank=True)
     property_image_2 = models.ImageField(upload_to='media/property_images/%Y/%m/%d/', blank=True)
@@ -69,4 +75,5 @@ class Search(models.Model) :
     property_neighborhood = models.ForeignKey(PropertyNeighborhood, on_delete=models.SET_NULL, null=True)
     property_type_price_range = models.ForeignKey(PropertyPricerange, on_delete=models.SET_NULL, null=True)
 
-
+    def __str__(self):
+        return str(self.id)

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Property</title>
+  <style>
+    label {
+      font-weight: bold;
+        padding-left: 30px;
+        padding-top: 2px;
+    }
+    h1{
+        font-size: 30px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Add Property</h1>
+  <form method="POST" enctype="multipart/form-data" class="my-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input class="btn btn-lg btn-viewDetails" type="submit" value="Submit">
+  </form>
+</body>
+</html>
+{% endblock %}

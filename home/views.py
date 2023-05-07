@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .forms import RegistrationForm
-from .models import Property, PropertyImage
+from .models import Property, PropertyImage,PropertyType, PropertyNeighborhood, PropertyPricerange ,Search
+from .forms import RegistrationForm, PropertyForm
+from django.urls import reverse
 import os
+from django.utils import timezone
+from django.db.models import Count
+from django.http import HttpResponse
+
 
 
 def login_view(request):
@@ -62,6 +67,91 @@ def profile_view(request):
 
 
 def listing_view(request):
-    listings = Property.objects.all()
+    listings = Property.objects.filter(flag=True)
     context = {'listings': listings}
     return render(request, 'listings.html', context)
+
+def add_property(request):
+    if request.method == 'POST':
+        form = PropertyForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home:listings')
+    else:
+        form = PropertyForm()
+    return render(request, 'add_property.html', {'form': form})
+
+def edit_property(request, pk):
+    property = Property.objects.get(id=pk)
+    if request.method == 'POST':
+        form = PropertyForm(request.POST, request.FILES, instance=property)
+        if form.is_valid():
+            form.save()
+            return redirect('listings')
+    else:
+        form = PropertyForm(instance=property)
+    return render(request, 'edit_property.html', {'form': form})
+
+def property_search(request):
+
+    property_types = PropertyType.objects.all()
+    neighborhoods = PropertyNeighborhood.objects.all()
+    price_ranges = PropertyPricerange.objects.all()
+    properties = Property.objects.filter(flag=True)
+
+    searched_property = request.GET.get('property_type')
+    searched_neighbourhood = request.GET.get('property_neighborhood')
+    searched_pricerange = request.GET.get('property_price_range')
+
+    if request.GET.get('property_type'):
+        properties = properties.filter(property_type=request.GET.get('property_type'))
+        Search.objects.create(date=timezone.now(), property_type_id=request.GET.get('property_type'))
+    elif request.GET.get('property_neighborhood'):
+        properties = properties.filter(property_neighborhood=request.GET.get('property_neighborhood'))
+        Search.objects.create(date=timezone.now(), property_neighborhood_id=request.GET.get('property_neighborhood'))
+    elif request.GET.get('property_price_range'):
+        properties = properties.filter(property_type_price_range=request.GET.get('property_price_range'))
+        Search.objects.create(date=timezone.now(), property_type_price_range_id=request.GET.get('property_price_range'))
+    context = {
+        'property_types': property_types,
+        'neighborhoods': neighborhoods,
+        'price_ranges': price_ranges,
+        'properties': properties,
+        'searched_property': searched_property,
+        'searched_neighbourhood': searched_neighbourhood,
+        'searched_pricerange': searched_pricerange,
+    }
+
+    return render(request, 'search.html', context)
+
+
+def generate_report(request):
+    results = None
+
+    if request.method == 'GET':
+        # Get the search criteria from the request parameters
+        report_type = request.GET.get('report_type')
+        month = request.GET.get('month')
+        year = request.GET.get('year')
+
+        # Filter the results based on the report type
+        if report_type == 'property_type':
+            results = Search.objects.filter(
+                date__month=month,
+                date__year=year,
+                property_type_id__isnull=False
+            ).values('property_type').annotate(count=Count('id'))
+        elif report_type == 'neighborhood_type':
+            results = Search.objects.filter(
+                date__month=month,
+                date__year=year,
+                property_neighborhood__name__isnull=False
+            ).values('property_neighborhood').annotate(count=Count('id'))
+        elif report_type == 'price_range_type':
+            results = Search.objects.filter(
+                date__month=month,
+                date__year=year,
+                property_type_price_range_id__isnull=False
+            ).values('property_type_price_range').annotate(count=Count('id'))
+
+    return render(request, 'report.html', {'results': results})
