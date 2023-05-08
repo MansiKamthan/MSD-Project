@@ -68,6 +68,14 @@ class PropertyImage(models.Model):
         return str(self.property_id)
 
 
+class Profile(models.Model):
+    profile_image = models.ImageField(upload_to='media/property_images/%Y/%m/%d/', blank=True)
+    name = models.CharField(max_length=50)
+    phonenumber = models.IntegerField(max_length=10)
+    email = models.EmailField(max_length=50)
+    address = models.TextField(max_length=50)
+
+
 class Search(models.Model) :
     id = models.AutoField(primary_key=True)
     date = models.DateTimeField(default=timezone.now)

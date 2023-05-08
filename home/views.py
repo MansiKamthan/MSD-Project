@@ -1,14 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .models import Property, PropertyImage,PropertyType, PropertyNeighborhood, PropertyPricerange ,Search
+from .models import Property, PropertyImage, PropertyType, PropertyNeighborhood, PropertyPricerange, Search, Profile
 from .forms import RegistrationForm, PropertyForm
 from django.urls import reverse
 import os
 from django.utils import timezone
 from django.db.models import Count
 from django.http import HttpResponse
-
 
 
 def login_view(request):
@@ -63,13 +62,22 @@ def event_view(request):
 
 
 def profile_view(request):
-    return render(request, 'profile.html')
+    profile = get_object_or_404(Profile)
+    context = {'profile': profile}
+    return render(request, 'profile.html', context)
 
 
 def listing_view(request):
     listings = Property.objects.filter(flag=True)
     context = {'listings': listings}
     return render(request, 'listings.html', context)
+
+
+def detail_view(request, pk):
+    details = get_object_or_404(Property, pk=pk)
+    context = {'details': details}
+    return render(request, 'details.html', context)
+
 
 def add_property(request):
     if request.method == 'POST':
@@ -80,6 +88,7 @@ def add_property(request):
     else:
         form = PropertyForm()
     return render(request, 'add_property.html', {'form': form})
+
 
 def edit_property(request, pk):
     property = Property.objects.get(id=pk)
@@ -92,8 +101,8 @@ def edit_property(request, pk):
         form = PropertyForm(instance=property)
     return render(request, 'edit_property.html', {'form': form})
 
-def property_search(request):
 
+def property_search(request):
     property_types = PropertyType.objects.all()
     neighborhoods = PropertyNeighborhood.objects.all()
     price_ranges = PropertyPricerange.objects.all()
@@ -155,3 +164,7 @@ def generate_report(request):
             ).values('property_type_price_range').annotate(count=Count('id'))
 
     return render(request, 'report.html', {'results': results})
+
+
+def enquire_view(request):
+    return render(request, 'enquire.html')

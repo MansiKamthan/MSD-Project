@@ -1,0 +1,13 @@
+
+{% extends 'base.html' %}
+{% block content %}
+        <input type="text" id="fname" name="firstname" placeholder="First Name.."><br><br>
+
+        <input type="text" id="lname" name="lastname" placeholder="Last Name.."><br><br>
+
+        <input type="text" name="Email" placeholder="Email.."><br><br>
+
+        <textarea id="subject" name="subject" placeholder="Enter your message here.." style="height:170px"></textarea><br><br>
+        <button class= "btn btn-lg btn-viewDetails" type="button" onclick="alert('Thanks for sending details,we will reach out to you soon.')">Submit </button><br><br>
+
+{% endblock %}

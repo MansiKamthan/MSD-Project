@@ -70,6 +70,8 @@ margin-left:20px;}
 h5{
 margin-left:20px;}
 
+
+
 </style>
 </head>
 <body background="bg.png">
@@ -78,28 +80,20 @@ margin-left:20px;}
   <div class="row">
     <div class="column">
 	<h3> <b>About the Realtor </b></h3>
-        <img id="image-preview" src="{% static 'img/carlos.png' %}" alt="Static Image" style="width:50%";"height:50%">
-      	  <br> </br>
+        <img id="image-preview" src="{{ profile.profile_image.url }}" style="width:50%";"height:50%">
+      	  <br>
 	  <h5> <u><b> Contact Us: </b> </u> </h5>
-	  <h5><b> Name : Carlos Kosala </b> </h5>
-	  <h5> <b> Phone Number : 402-854-1186 </b> </h5>
-      <h5> <b> Mail Id: Carloskoasala@ckwebsite.com </b> </h5>
-      <h5> <b> Office Address : 254 N 114th St,Omaha,NE </b> </h5>
-    </div>
+	  <h5><b> Name : {{ profile.name }} </b> </h5>
+	  <h5> <b> Phone Number : {{ profile.phonenumber }} </b> </h5>
+      <h5> <b> Mail Id: {{ profile.email }} </b> </h5>
+      <h5> <b> Office Address : {{ profile.address }}</b> </h5>
+
     <div class="column">
-	<h3> <u> <i> Have Questions ??? </i> </u> </h3>
+        <a href="{% url 'home:enquire' %}"><button> Contact Us  </button></a>
 
-
-        <input type="text" id="fname" name="firstname" placeholder="First Name..">
-
-        <input type="text" id="lname" name="lastname" placeholder="Last Name..">
-
-        <input type="text" name="Email" placeholder="Email..">
-
-        <textarea id="subject" name="subject" placeholder="Enter your message here.." style="height:170px"></textarea>
-        <button class= "btn btn-lg btn-viewDetails" type="button" onclick="alert('Thanks for sending details,we will reach out to you soon.')">Submit </button>
-
-    </div>
+  </div>
+</div>
+  </div>
 </div>
 
 </body>

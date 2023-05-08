@@ -96,7 +96,9 @@ button:hover{
             <p class="property-address"> <b>Address: </b>{{ listing.address }}</p>
             <p class="property-status"><b>Status: </b> {{ listing.status }}</p>
             <div class="des">
-                <button class="btn btn-lg btn-viewDetails" style="font-weight: bold">View Details</button>
+                <a href="{% url 'home:details' listing.id%}">
+                    <button class="btn btn-lg btn-viewDetails" style="font-weight: bold">View Details</button>
+                </a>
             </div>
         </div>
     </div>

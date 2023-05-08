@@ -1,0 +1,60 @@
+
+{% extends 'base.html' %}
+{% block content %}
+    <style>
+    .image-container {
+      display: flex; /* Use flexbox to create a flexible container */
+    }
+
+    .image-container img {
+        flex: 1; /* Make each image take up equal space */
+        margin: 5px; /* Add some margin between the images */
+    }
+    .container {
+      display: flex; /* Use flexbox to create a flexible container */
+    }
+
+    .box {
+      flex: 1; /* Make each box take up equal space */
+      padding: 10px; /* Add some padding to the boxes */
+        margin-right: 1px;
+        display: grid;
+        line-height: 15px;
+        font-weight: bold;
+    }
+    .box:last-child{
+        margin-right: 0;
+    }
+    </style>
+    <div class="image-container">
+    <img src="{{details.property_image_main.url}}" style="width: 300px; height: 200px">
+    <img src="{{details.property_image_1.url}}" style="width: 300px; height: 200px">
+    <img src="{{details.property_image_2.url}}" style="width: 300px; height: 200px">
+    <img src="{{details.property_image_3.url}}" style="width: 300px; height: 200px">
+    </div>
+    <div class="container">
+    <div class= "box left-box">
+        <h8>Description: {{ details.description }}</h8><br>
+    <h8>Name: {{ details.name }}</h8><br>
+    <h8>Status : {{ details.status }}</h8><br>
+    <h8>Address : {{ details.address }}</h8><br>
+    <h8>Number of Bedrooms: {{ details.bedrooms }}</h8><br>
+    <h8>Number of Bathrooms: {{ details.bathrooms }}</h8><br>
+    <h8>Size in sqft: {{ details.square_feet }}</h8><br><br><br>
+        <a href="{% url 'home:enquire' %}">
+                    <button class="btn btn-lg btn-viewDetails" style="font-weight: bold">Enquire about Property</button>
+                </a>
+    </div>
+        <div class = "box">
+    <h8>Property type: {{ details.property_type }}</h8><br>
+    <h8>Property Neighborhood: {{ details.property_neighborhood }}</h8><br>
+    <h8>Price: ${{ details.price }}</h8><br>
+    <h8>Featured Property: {{ details.featured_property }}</h8><br><br><br>
+            <a href="{% url 'home:listings'%}">
+                    <button class="btn btn-lg btn-viewDetails" style="font-weight: bold">Back</button>
+                </a>
+    </div>
+    </div>
+
+{% endblock %}
+
