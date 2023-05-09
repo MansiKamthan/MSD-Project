@@ -9,12 +9,14 @@ class PropertyType(models.Model):
     def __str__(self):
         return str(self.property_type_name)
 
+
 class PropertyNeighborhood(models.Model):
     id = models.AutoField(primary_key=True)
     property_neighborhood_name = models.CharField(max_length=255)
 
     def __str__(self):
         return str(self.property_neighborhood_name)
+
 
 class PropertyPricerange(models.Model):
     id = models.AutoField(primary_key=True)
@@ -23,9 +25,9 @@ class PropertyPricerange(models.Model):
     def __str__(self):
         return str(self.property_price_range_name)
 
-class Property(models.Model):
 
-    STATUS_CHOICES =(
+class Property(models.Model):
+    STATUS_CHOICES = (
         ('available', 'AVAILABLE'),
         ('pending', 'PENDING'),
         ('sold', 'SOLD'),
@@ -76,7 +78,7 @@ class Profile(models.Model):
     address = models.TextField(max_length=50)
 
 
-class Search(models.Model) :
+class Search(models.Model):
     id = models.AutoField(primary_key=True)
     date = models.DateTimeField(default=timezone.now)
     property_type = models.ForeignKey(PropertyType, on_delete=models.SET_NULL, null=True)
@@ -85,3 +87,8 @@ class Search(models.Model) :
 
     def __str__(self):
         return str(self.id)
+
+
+class Event(models.Model):
+    picture = models.ImageField(upload_to='media/property_images/%Y/%m/%d/', blank=True)
+    description = models.TextField(max_length=500)

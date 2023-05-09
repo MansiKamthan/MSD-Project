@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Property
+from .models import Property, Event
 
 
 class RegistrationForm(forms.ModelForm):
@@ -25,7 +25,16 @@ class RegistrationForm(forms.ModelForm):
             user.save()
         return user
 
+
 class PropertyForm(forms.ModelForm):
     class Meta:
         model = Property
-        fields = ['name', 'description', 'address', 'bedrooms', 'bathrooms', 'square_feet', 'price', 'featured_property', 'property_image_main', 'property_image_1', 'property_image_2', 'property_image_3', 'property_type', 'property_neighborhood', 'property_type_price_range']
+        fields = ['name', 'description', 'address', 'bedrooms', 'bathrooms', 'square_feet', 'price',
+                  'featured_property', 'property_image_main', 'property_image_1', 'property_image_2',
+                  'property_image_3', 'property_type', 'property_neighborhood', 'property_type_price_range']
+
+
+class EventForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = ['picture', 'description']

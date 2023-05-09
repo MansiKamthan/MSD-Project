@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .models import Property, PropertyImage, PropertyType, PropertyNeighborhood, PropertyPricerange, Search, Profile
-from .forms import RegistrationForm, PropertyForm
+from .models import Property, PropertyImage, PropertyType, PropertyNeighborhood, PropertyPricerange, Search, Profile, \
+    Event
+from .forms import RegistrationForm, PropertyForm, EventForm
 from django.urls import reverse
 import os
 from django.utils import timezone
@@ -57,8 +58,21 @@ def home_view(request):
     return render(request, 'home.html', context)
 
 
+def add_event(request):
+    if request.method == 'POST':
+        form = EventForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home:event')
+    else:
+        form = EventForm()
+    return render(request, 'add_event.html', {'form': form})
+
+
 def event_view(request):
-    return render(request, 'event.html')
+    events = Event.objects.all()
+    context = {'events': events}
+    return render(request, 'event.html', context)
 
 
 def profile_view(request):
