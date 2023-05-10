@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Property, Event
+from .models import Property, Event, Profile
 
 
 class RegistrationForm(forms.ModelForm):
@@ -38,3 +38,9 @@ class EventForm(forms.ModelForm):
     class Meta:
         model = Event
         fields = ['picture', 'description']
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['profile_image', 'name', 'phonenumber', 'email', 'address']

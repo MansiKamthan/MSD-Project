@@ -80,7 +80,8 @@ margin-left:20px;}
   <div class="row">
     <div class="column">
 	<h3> <b>About the Realtor </b></h3>
-        <img id="image-preview" src="{{ profile.profile_image.url }}" style="width:50%";"height:50%">
+        <img id="image-preview" src="{{ profile.profile_image.url }}" style="width:50%"; "height:50%">
+
       	  <br>
 	  <h5> <u><b> Contact Us: </b> </u> </h5>
 	  <h5><b> Name : {{ profile.name }} </b> </h5>
@@ -92,12 +93,12 @@ margin-left:20px;}
         <a href="{% url 'home:enquire' %}"><button> Contact Us  </button></a>
 
   </div>
+        {% if user.is_authenticated %}
+            <li><a class="nav-link" href="{% url 'home:edit_profile' %}"><button class="btn btn-lg btn-viewDetails" style="font-weight: bold">Edit Profile</button></a>
+                     </li>
+                {% endif %}
 </div>
   </div>
-</div>
-
-</body>
-</html>
 
 </body>
 </html>

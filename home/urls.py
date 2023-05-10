@@ -5,7 +5,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 
-
 app_name = 'home'
 
 urlpatterns = [
@@ -15,6 +14,7 @@ urlpatterns = [
     path('event/', event_view, name='event'),
     path('add_event/', views.add_event, name='add_event'),
     path('profile/', profile_view, name='profile'),
+    path('edit_profile/', views.edit_profile, name='edit_profile'),
     path('profile/enquire/', enquire_view, name='enquire'),
     path('listings/', listing_view, name='listings'),
     path('listings/details/<int:pk>/', detail_view, name='details'),

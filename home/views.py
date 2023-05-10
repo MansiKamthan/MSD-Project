@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .models import Property, PropertyImage, PropertyType, PropertyNeighborhood, PropertyPricerange, Search, Profile, \
     Event
-from .forms import RegistrationForm, PropertyForm, EventForm
+from .forms import RegistrationForm, PropertyForm, EventForm, ProfileForm
 from django.urls import reverse
 import os
 from django.utils import timezone
@@ -182,3 +182,15 @@ def generate_report(request):
 
 def enquire_view(request):
     return render(request, 'enquire.html')
+
+
+def edit_profile(request):
+    profile = Profile.objects.get()
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('home:profile')
+    else:
+        form = ProfileForm(instance=profile)
+    return render(request, 'edit_profile.html', {'form': form})
