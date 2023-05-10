@@ -43,4 +43,4 @@ class EventForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['profile_image', 'name', 'phonenumber', 'email', 'address']
+        fields = ['profile_image', 'phonenumber', 'email', 'address']
