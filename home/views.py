@@ -110,7 +110,7 @@ def edit_property(request, pk):
         form = PropertyForm(request.POST, request.FILES, instance=property)
         if form.is_valid():
             form.save()
-            return redirect('listings')
+            return redirect('home:listings')
     else:
         form = PropertyForm(instance=property)
     return render(request, 'edit_property.html', {'form': form})
@@ -163,19 +163,20 @@ def generate_report(request):
                 date__month=month,
                 date__year=year,
                 property_type_id__isnull=False
-            ).values('property_type').annotate(count=Count('id'))
+            ).values('property_type__property_type_name').annotate(count=Count('id'))
         elif report_type == 'neighborhood_type':
             results = Search.objects.filter(
                 date__month=month,
                 date__year=year,
-                property_neighborhood__name__isnull=False
-            ).values('property_neighborhood').annotate(count=Count('id'))
+                property_neighborhood__id__isnull=False
+            ).values('property_neighborhood__property_neighborhood_name').annotate(count=Count('id'))
         elif report_type == 'price_range_type':
             results = Search.objects.filter(
                 date__month=month,
                 date__year=year,
                 property_type_price_range_id__isnull=False
-            ).values('property_type_price_range').annotate(count=Count('id'))
+            ).values('property_type_price_range__property_price_range_name').annotate(count=Count('id'))
+
 
     return render(request, 'report.html', {'results': results})
 

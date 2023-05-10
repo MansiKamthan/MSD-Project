@@ -14,6 +14,15 @@
         font-weight: bold;
     }
     </style>
+    <script>
+    function openEnquiryForm() {
+      document.getElementById("enquiryOverlay").style.display = "block";
+    }
+
+    function closeEnquiryForm() {
+      document.getElementById("enquiryOverlay").style.display = "none";
+    }
+  </script>
 </head>
 <body id="body" background="{% static 'img/ck_background.png' %} ">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top"">

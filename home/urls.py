@@ -19,6 +19,7 @@ urlpatterns = [
     path('listings/', listing_view, name='listings'),
     path('listings/details/<int:pk>/', detail_view, name='details'),
     path('add_property/', views.add_property, name='add_property'),
+    path('edit_property/<int:pk>/', views.edit_property, name='edit_property'),
     path('', home_view, name='home'),
     path('search/', views.property_search, name='property_search'),
     path('report/', views.generate_report, name='generate_report'),

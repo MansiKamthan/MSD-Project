@@ -2,66 +2,80 @@
 {% load static %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<form method="GET" action="{% url 'home:generate_report' %}">
-    <label for="report_type">Select Report Type:</label>
-    <select name="report_type" id="report_type">
-        <option value="property_type">Property Type</option>
-        <option value="neighborhood_type">Neighborhood Type</option>
-        <option value="price_range_type">Price Range Type</option>
-    </select>
+    <style>
+        label {
+            display: inline-block;
+            margin-bottom: 10px;
+        }
 
-    <label for="month">Month:</label>
-    <select name="month" id="month">
-        <option value="01">Jan</option>
-        <option value="02">Feb</option>
-        <option value="03">Mar</option>
-        <option value="04">Apr</option>
-        <option value="05">May</option>
-        <option value="06">Jun</option>
-    </select>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
 
-    <label for="year">Year:</label>
-    <select name="year" id="year">
-        <option value="2023">2023</option>
-        <option value="2024">2024</option>
-    </select>
+        th, td {
+            border: 2px solid black;
+            padding: 5px;
+            text-align: left;
+        }
 
-    <button type="submit">Generate Report</button>
-</form>
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 
-{% if results %}
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Date</th>
-                <th>Property Type</th>
-                <th>Neighborhood</th>
-                <th>Price Range</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for result in results %}
+    <br>
+    <br>
+    <form method="GET" action="{% url 'home:generate_report' %}">
+        <label for="report_type"><b>Select Report Type:</b></label>
+        <select name="report_type" id="report_type">
+            <option value="property_type">Property Type</option>
+            <option value="neighborhood_type">Neighborhood Type</option>
+            <option value="price_range_type">Price Range Type</option>
+        </select>
+        <br>
+        <label for="month"><b>Month:</b></label>
+        <select name="month" id="month">
+            <option value="01">Jan</option>
+            <option value="02">Feb</option>
+            <option value="03">Mar</option>
+            <option value="04">Apr</option>
+            <option value="05">May</option>
+            <option value="06">Jun</option>
+        </select>
+        <br>
+        <label for="year"><b>Year:</b></label>
+        <select name="year" id="year">
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+        </select>
+
+        <button type="submit">Generate Report</button>
+    </form>
+    <br>
+    <br>
+    {% if results %}
+        <table>
+            <thead>
                 <tr>
-                    <td>{{ result.id }}</td>
-                    <td>{{ result.date }}</td>
-                    <td>{{ result.property_type }}</td>
-                    <td>{{ result.property_neighborhood }}</td>
-                    <td>{{ result.property_type_price_range }}</td>
+                    <th>Property Type</th>
+                    <th>Neighborhood</th>
+                    <th>Price Range</th>
+                    <th>Total Hit Count</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-{% else %}
-    <p>No results found.</p>
-{% endif %}
-</body>
-</html>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                    <tr>
+                        <td>{{ result.property_type__property_type_name }}</td>
+                        <td>{{ result.property_neighborhood__property_neighborhood_name }}</td>
+                        <td>{{ result.property_type_price_range__property_price_range_name }}</td>
+                        <td>{{ result.count }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p><b>No results found.</b></p>
+    {% endif %}
 {% endblock %}
