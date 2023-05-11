@@ -97,6 +97,9 @@ def add_property(request):
     if request.method == 'POST':
         form = PropertyForm(request.POST, request.FILES)
         if form.is_valid():
+            if form.cleaned_data['featured_property']:
+                # Set existing featured property to False
+                Property.objects.filter(featured_property=True).update(featured_property=False)
             form.save()
             return redirect('home:listings')
     else:
@@ -109,6 +112,9 @@ def edit_property(request, pk):
     if request.method == 'POST':
         form = PropertyForm(request.POST, request.FILES, instance=property)
         if form.is_valid():
+            if form.cleaned_data['featured_property']:
+                # Set existing featured property to False
+                Property.objects.filter(featured_property=True).update(featured_property=False)
             form.save()
             return redirect('home:listings')
     else:
@@ -195,3 +201,9 @@ def edit_profile(request):
     else:
         form = ProfileForm(instance=profile)
     return render(request, 'edit_profile.html', {'form': form})
+
+def remove_listing(request, property_id):
+    property = Property.objects.get(id=property_id)
+    property.flag = False
+    property.save()
+    return redirect('home:listings')

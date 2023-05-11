@@ -23,6 +23,7 @@ urlpatterns = [
     path('', home_view, name='home'),
     path('search/', views.property_search, name='property_search'),
     path('report/', views.generate_report, name='generate_report'),
+    path('remove_listing/<int:property_id>/', views.remove_listing, name='remove_listing'),
 
 ]
 

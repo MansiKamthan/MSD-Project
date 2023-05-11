@@ -48,7 +48,7 @@ class Property(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     featured_property = models.BooleanField(choices=PROPERTY_CHOICES, default='False')
     flag = models.BooleanField(default=True)
-    property_image_main = models.ImageField(upload_to='media/property_images/%Y/%m/%d/', blank=True)
+    property_image_main = models.ImageField(upload_to='media/property_images/%Y/%m/%d/', blank=False)
     property_image_1 = models.ImageField(upload_to='media/property_images/%Y/%m/%d/', blank=True)
     property_image_2 = models.ImageField(upload_to='media/property_images/%Y/%m/%d/', blank=True)
     property_image_3 = models.ImageField(upload_to='media/property_images/%Y/%m/%d/', blank=True)
