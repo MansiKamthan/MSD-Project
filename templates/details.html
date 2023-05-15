@@ -10,9 +10,10 @@
         }
 
         .image-container img {
-            flex: 0 0 300px; /* Set a fixed width and height for each image */
+            flex: 0 0 200px; /* Set a fixed width and height for each image */
             height: 200px;
-            margin: 5px;
+            margin: 10px;
+            margin-right: 20px;
         }
 
         .container {
@@ -75,28 +76,28 @@
     <div class="image-container">
         <div class="col-2">
             {% if details.property_image_main %}
-                <img src="{{ details.property_image_main.url }}" style="width: 300px; height: 200px">
+                <img src="{{ details.property_image_main.url }}" style="width: 230px; height: 200px">
             {% else %}
                 <img src="{% static 'img/default.png' %}" style="width: 300px; height: 200px">
             {% endif %}
         </div>
         <div class="col-2">
             {% if details.property_image_1 %}
-                <img src="{{ details.property_image_1.url }}" style="width: 300px; height: 200px">
+                <img src="{{ details.property_image_1.url }}" style="width: 230px; height: 200px">
             {% else %}
                 <img src="{% static 'img/default.png' %}" style="width: 300px; height: 200px">
             {% endif %}
         </div>
         <div class="col-2">
             {% if details.property_image_2 %}
-                <img src="{{ details.property_image_2.url }}" style="width: 300px; height: 200px">
+                <img src="{{ details.property_image_2.url }}" style="width: 230px; height: 200px">
             {% else %}
                 <img src="{% static 'img/default.png' %}" style="width: 300px; height: 200px">
             {% endif %}
         </div>
         <div class="col-2">
             {% if details.property_image_3 %}
-                <img src="{{ details.property_image_3.url }}" style="width: 300px; height: 200px">
+                <img src="{{ details.property_image_3.url }}" style="width: 230px; height: 200px">
             {% else %}
                 <img src="{% static 'img/default.png' %}" style="width: 300px; height: 200px">
             {% endif %}

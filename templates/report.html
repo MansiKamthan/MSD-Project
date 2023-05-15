@@ -3,9 +3,20 @@
 
 {% block content %}
     <style>
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
         label {
             display: inline-block;
-            margin-bottom: 10px;
+            margin: 0 10px 10px 20px;
+            width: 150px;
+        }
+
+        select {
+            width: 250px;
         }
 
         table {
@@ -27,14 +38,14 @@
     <br>
     <br>
     <form method="GET" action="{% url 'home:generate_report' %}">
-        <label for="report_type"><b>Select Report Type:</b></label>
+        <label for="report_type" style="width:200px"><b>Select Search report by:</b></label>
         <select name="report_type" id="report_type">
             <option value="property_type">Property Type</option>
             <option value="neighborhood_type">Neighborhood Type</option>
             <option value="price_range_type">Price Range Type</option>
         </select>
-        <br>
-        <label for="month"><b>Month:</b></label>
+
+        <label for="month" style="width:100px"><b>Month:</b></label>
         <select name="month" id="month">
             <option value="01">Jan</option>
             <option value="02">Feb</option>
@@ -43,15 +54,14 @@
             <option value="05">May</option>
             <option value="06">Jun</option>
         </select>
-        <br>
-        <label for="year"><b>Year:</b></label>
+
+        <label for="year" style="width:100px"><b>Year:</b></label>
         <select name="year" id="year">
             <option value="2023">2023</option>
             <option value="2024">2024</option>
         </select>
-<br>
-        <br>
-        <button type="submit">Generate Report</button>
+
+       &nbsp;&nbsp; <button type="submit"><b>Generate Report</b></button>
     </form>
     <br>
     <br>

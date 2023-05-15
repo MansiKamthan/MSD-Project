@@ -160,7 +160,9 @@ label, select {
             <p class="property-address"> <b>Address: </b>{{ property.address }}</p>
             <p class="property-status"><b>Status: </b> {{ property.status }}</p>
             <div class="des">
-                <button class="btn btn-lg btn-viewDetails" style=" font-weight: bold">View Details</button>
+                <a href="{% url 'home:details' property.id%}">
+                    <button class="btn btn-lg btn-viewDetails" style="font-weight: bold">View Details</button>
+                </a>
             </div>
         </div>
     </div>

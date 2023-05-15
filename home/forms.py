@@ -29,7 +29,7 @@ class RegistrationForm(forms.ModelForm):
 class PropertyForm(forms.ModelForm):
     class Meta:
         model = Property
-        fields = ['name', 'description', 'address', 'bedrooms', 'bathrooms', 'square_feet', 'price',
+        fields = ['name','status', 'description', 'address', 'bedrooms', 'bathrooms', 'square_feet', 'price',
                   'featured_property', 'property_image_main', 'property_image_1', 'property_image_2',
                   'property_image_3', 'property_type', 'property_neighborhood', 'property_type_price_range']
 
